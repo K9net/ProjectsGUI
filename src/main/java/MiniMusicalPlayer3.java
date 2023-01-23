@@ -29,7 +29,7 @@ public class MiniMusicalPlayer3 {
             Sequence seq = new Sequence(Sequence.PPQ, 4);
             Track track = seq.createTrack();
             int r;
-            for (int i = 0; i < 60; i += 2) {
+            for (int i = 0; i < 60; i += 3) {
                 r = (int) ((Math.random() * 50) + 1);
                 track.add(makeEvent(144, 1, r, 100, i));
                 track.add(makeEvent(176, 1, 127, 0, i));
