@@ -1,9 +1,6 @@
 package Serialize.Game;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class GameSaver {
     public static void main(String[] args) {
@@ -23,7 +20,7 @@ public class GameSaver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream("GameSaver.ser"));
             GameCharacter firstRestore = (GameCharacter) is.readObject();
@@ -33,6 +30,11 @@ public class GameSaver {
             firstRestore.getAll();
             secondRestore.getAll();
             thirdRestore.getAll();
+            FileWriter fw = new FileWriter("GameSaver.txt");
+            fw.write(firstRestore.getAll());
+            fw.write(secondRestore.getAll());
+            fw.write(thirdRestore.getAll());
+            fw.close();
 
         } catch (Exception e){
             e.printStackTrace();

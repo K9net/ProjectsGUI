@@ -18,9 +18,9 @@ public class GameCharacter implements Serializable {
         this.weapons = weapons;
     }
 
-    public void getAll(){
-        System.out.println("Сила = " + power + " Здоровье = " + health + " Мана = " + mana + " Тип = " + type +
-                " Оружия = " + Arrays.toString(weapons));
+    public String getAll(){
+        return "Сила = " + power + " Здоровье = " + health + " Мана = " + mana + " Тип = " + type +
+                " Оружия = " + Arrays.toString(weapons) + "\n";
     }
 
     public int getPower() {
