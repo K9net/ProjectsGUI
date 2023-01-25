@@ -12,6 +12,7 @@ public class Deserialize {
             Serialize test1 = (Serialize) serialize;
             os.close();
             System.out.println(test1.getWidth());
+            System.out.println(test1.getHeight());
         } catch (Exception e){
             e.printStackTrace();
         }

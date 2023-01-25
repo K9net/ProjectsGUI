@@ -26,10 +26,19 @@ public class Serialize implements Serializable {
         this.height = height;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     public static void main(String[] args) {
         Serialize serialize = new Serialize();
         serialize.setHeight(20);
         serialize.setWidth(20);
+        serialize.setWeight(300);
 
         try {
             FileOutputStream fs = new FileOutputStream("test.ser");
