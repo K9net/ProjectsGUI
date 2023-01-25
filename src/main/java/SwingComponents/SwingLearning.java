@@ -1,3 +1,5 @@
+package SwingComponents;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class SwingLearning {
     }
 
     public void go() {
-        JFrame frame = new JFrame("SwingLearning");
+        JFrame frame = new JFrame("SwingComponents.SwingLearning");
         JPanel panel = new JPanel();
         panel.setBackground(Color.orange);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
