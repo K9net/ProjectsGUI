@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
 public class BeatBox {
@@ -35,21 +36,29 @@ public class BeatBox {
         checkBoxList = new ArrayList<>();
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
 
-        JButton start = new JButton("Start");
+        JButton start = new JButton("Начать проигрывание");
         start.addActionListener(new MyStartListener());
         buttonBox.add(start);
 
-        JButton stop = new JButton("Stop");
+        JButton stop = new JButton("Остановить");
         stop.addActionListener(new MyStopListener());
         buttonBox.add(stop);
 
-        JButton upTempo = new JButton("upTempo");
+        JButton upTempo = new JButton("Ускорить");
         upTempo.addActionListener(new MyUpTempoListener());
         buttonBox.add(upTempo);
 
-        JButton downTempo = new JButton("downTempo");
+        JButton downTempo = new JButton("Замедлить");
         downTempo.addActionListener(new MyDownTempoListener());
         buttonBox.add(downTempo);
+
+        JButton saveScheme = new JButton("Сохранить схему");
+        saveScheme.addActionListener(new MySaveListener());
+        buttonBox.add(saveScheme);
+
+        JButton restoreScheme = new JButton("Восстановить схему");
+        restoreScheme.addActionListener(new MyRestoreListener());
+        buttonBox.add(restoreScheme);
 
 
         label = new JLabel();
@@ -96,6 +105,59 @@ public class BeatBox {
         }
     }
 
+    public class MySaveListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean[] checkboxStatus = new boolean[256];
+            for (int i = 0; i < 256; i++) {
+                JCheckBox check = (JCheckBox) checkBoxList.get(i);
+                if(check.isSelected())
+                {
+                    checkboxStatus[i] = true;
+                }
+            }
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showSaveDialog(theFrame);
+            try{
+                FileOutputStream fileStream = new FileOutputStream(fileChooser.getSelectedFile());
+                ObjectOutputStream outputStream = new ObjectOutputStream(fileStream);
+                outputStream.writeObject(checkboxStatus);
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public class MyRestoreListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean[] checkboxStatus = null;
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showOpenDialog(theFrame);
+            try{
+                FileInputStream fileStream = new FileInputStream(fileChooser.getSelectedFile());
+                ObjectInputStream objectStream = new ObjectInputStream(fileStream);
+                checkboxStatus = (boolean[]) objectStream.readObject();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+
+            for (int i = 0; i < 256; i++) {
+                JCheckBox check = (JCheckBox) checkBoxList.get(i);
+                if(checkboxStatus[i]){
+                    check.setSelected(true);
+                } else {
+                    check.setSelected(false);
+                }
+            }
+            sequencer.stop();
+            buildTrackAndStart();
+        }
+    }
+
     public class MyStartListener implements ActionListener {
 
         @Override
@@ -118,7 +180,7 @@ public class BeatBox {
         public void actionPerformed(ActionEvent e) {
             float tempoFactor = sequencer.getTempoFactor();
             sequencer.setTempoFactor((float) (tempoFactor + 0.025));
-            label.setText(String.format("Speed: %.3f", sequencer.getTempoFactor()));
+            label.setText(String.format("Скорость: %.3f", sequencer.getTempoFactor()));
         }
     }
 
@@ -128,7 +190,7 @@ public class BeatBox {
         public void actionPerformed(ActionEvent e) {
             float tempoFactor = sequencer.getTempoFactor();
             sequencer.setTempoFactor((float) (tempoFactor - 0.025));
-            label.setText(String.format("Speed: %.3f", sequencer.getTempoFactor()));
+            label.setText(String.format("Скорость: %.3f", sequencer.getTempoFactor()));
         }
     }
 
