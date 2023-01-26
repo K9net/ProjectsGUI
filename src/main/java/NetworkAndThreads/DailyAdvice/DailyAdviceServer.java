@@ -1,4 +1,4 @@
-package NetworkAndStreams.DailyAdvice;
+package NetworkAndThreads.DailyAdvice;
 
 import java.io.PrintWriter;
 import java.net.ServerSocket;

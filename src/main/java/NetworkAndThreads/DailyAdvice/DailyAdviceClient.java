@@ -1,4 +1,4 @@
-package NetworkAndStreams.DailyAdvice;
+package NetworkAndThreads.DailyAdvice;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
