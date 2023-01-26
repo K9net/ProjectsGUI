@@ -25,7 +25,7 @@ public class FamilyValeraAndCat implements Runnable{
         System.out.println(bankAccount.getBalance());
     }
 
-    private void makeWithdraw(int amount){
+    private synchronized void makeWithdraw(int amount){
         if(bankAccount.getBalance() >= amount){
             System.out.println(Thread.currentThread().getName() + " пытается снять деньги");
             try {
