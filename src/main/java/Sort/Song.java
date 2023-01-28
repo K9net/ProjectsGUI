@@ -4,10 +4,10 @@ public class Song implements Comparable<Song> {
     private String name;
     private String artist;
     private String rating;
-    private String bpm;
+    private int bpm;
     private String duration;
 
-    Song(String n, String a, String r, String b, String d) {
+    Song(String n, String a, String r, int b, String d) {
         name = n;
         artist = a;
         rating = r;
@@ -28,7 +28,7 @@ public class Song implements Comparable<Song> {
     }
 
     public String getBpm() {
-        return bpm;
+        return String.valueOf(bpm);
     }
 
     public String getDuration() {
