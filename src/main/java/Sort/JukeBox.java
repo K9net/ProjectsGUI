@@ -3,9 +3,7 @@ package Sort;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class JukeBox {
@@ -32,6 +30,14 @@ public class JukeBox {
         ArtistCompare artistCompare = new ArtistCompare();
         Collections.sort(songList, artistCompare);
         System.out.println(songList);
+
+        HashSet<Song> songHashSet = new HashSet<>();
+        songHashSet.addAll(songList);
+        System.out.println(songHashSet);
+
+        TreeSet<Song> treeSet = new TreeSet<>();
+        treeSet.addAll(songHashSet);
+        System.out.println(treeSet);
     }
 
     void getSongs() {

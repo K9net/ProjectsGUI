@@ -15,6 +15,15 @@ public class Song implements Comparable<Song> {
         duration = d;
     }
 
+    public boolean equals(Object aSong){
+        Song s = (Song) aSong;
+        return getName().equals(s.getName());
+    }
+
+    public int hashCode(){
+        return name.hashCode();
+    }
+
     public String getName() {
         return name;
     }
