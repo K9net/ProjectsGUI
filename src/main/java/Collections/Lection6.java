@@ -19,8 +19,9 @@ public class Lection6 {
 
                     @Override
                     public T next() {
-                        if( rest-- == 0)
+                        if(rest == 0)
                             throw new NoSuchElementException();
+                        rest--;
                         return value;
                     }
                 };
