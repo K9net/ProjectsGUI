@@ -1,9 +1,6 @@
 package Collections;
 
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 public class Lection6 {
     static <T> Iterable<T> nCopies(T value, int count) {
@@ -27,12 +24,13 @@ public class Lection6 {
         };
     }
 
-    static Set<Integer> rangeSet(int fromInclusive, int toExclusive){
+    static Set<Integer> rangeSet(int fromInclusive, int toExclusive) {
         return new AbstractSet<Integer>() {
             @Override
             public Iterator<Integer> iterator() {
                 return new Iterator<Integer>() {
                     int next = fromInclusive;
+
                     @Override
                     public boolean hasNext() {
                         return next != toExclusive;
@@ -40,7 +38,7 @@ public class Lection6 {
 
                     @Override
                     public Integer next() {
-                        if(next == toExclusive)
+                        if (next == toExclusive)
                             throw new NoSuchElementException();
                         return next++;
                     }
@@ -53,6 +51,23 @@ public class Lection6 {
             }
         };
     }
+
+    static List<Integer> rangeList(int fromInclusive, int toExclusive) {
+        return new AbstractList<Integer>() {
+            @Override
+            public Integer get(int index) {
+                if (index < 0 || index >= size())
+                    throw new IndexOutOfBoundsException(index);
+                return fromInclusive + index;
+            }
+
+            @Override
+            public int size() {
+                return toExclusive - fromInclusive;
+            }
+        };
+    }
+
 }
 
 
